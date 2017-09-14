@@ -148,27 +148,21 @@ double b=2.0;
 
 
 for(int i=1; i<=n; i++){
-
-
     *(x_vector+i)=h*i;
     *(b_vector+i) = double(i+1)/double(i);
     *(tilde_vector +i)=f_analytic(x_vector[i])*power;
     *(u_vector+i)=u(x_vector[i]);
 }
 
+// Forward substitution
 
+for (int i = 1; i < n; ++i)
+{
+   *(tilde_vector +i)=*(tilde_vector+i)+*(tilde_vector+i-1)/(*(b_vector+i));
+}
 
 //Finner verdien til v_n
 *(v_vector +n-1)=*(tilde_vector +n-1)/(*(b_vector +n-1));
-
-t1=clock();
-
-
-
-//Finner verdien til v_n
-
-*(v_vector +n-1)=*(tilde_vector +n-1)*pow(h,2)/(*(b_vector +n-1));
-
 
 
 //backward substetution
