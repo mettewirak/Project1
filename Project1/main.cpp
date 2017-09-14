@@ -11,6 +11,7 @@ double u(double x){
 }
 
 
+
 double f_analytic(double x){
     return 100*exp(-10*x);
 }
@@ -211,6 +212,9 @@ return 0;
 
 
 int main(){
+
+	cout << "test" << endl;
+
  int n = pow(10,3);
  special(n);
  general(n);
