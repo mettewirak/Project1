@@ -42,7 +42,8 @@ int with_solver(int n){
     double a=-1.0;
     double b=2.0;
     double c=-1.0;
-
+    clock_t t1,t2;
+    t1=clock();
     for(int i=0; i<n-2; i++){
     A(i,i+1)=c;
     A(i,i)=b;
@@ -63,8 +64,8 @@ int with_solver(int n){
 
     }
 
-    clock_t t1,t2;
-    t1=clock();
+
+
 
 
     vec v;
@@ -98,7 +99,8 @@ int LU(int n){
     double a=-1.0;
     double b=2.0;
     double c=-1.0;
-
+    clock_t t1,t2;
+    t1=clock();
     for(int i=0; i<n-2; i++){
     A(i,i+1)=c;
     A(i,i)=b;
@@ -119,11 +121,11 @@ int LU(int n){
 
     }
 
-    clock_t t1,t2;
+
 
 
     mat L, U;
-    t1=clock();
+
     lu(L,U, A);
 
     vec z;
@@ -150,7 +152,7 @@ int LU(int n){
 
 int main()
 {
-    int n=1000;
+    int n=10;
     LU(n);
     with_solver(n);
 
