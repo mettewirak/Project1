@@ -3,7 +3,7 @@
 #include <fstream>
 #include <time.h>
 #include <string>
-//using namespace std;
+using namespace std;
 std::ofstream ofile;
 
 double u(double x){
@@ -99,7 +99,7 @@ t2=clock();
 std::string filename ="resultat" + std::to_string(n) + ".txt";
 
 ofile.open(filename);
-//ofile.open("g_100.txt");
+
 
 
 
@@ -142,7 +142,7 @@ double* u_vector =new double[n];
 t1=clock();
 double b=2.0;
 *(b_vector)=b;
-*(tilde_vector + 0)=f_analytic(0);
+*(tilde_vector + 0)=f_analytic(0)*power;
 *(x_vector+0)=0;
     
 
@@ -150,17 +150,13 @@ double b=2.0;
 
 for(int i=1; i<=n; i++){
     *(x_vector+i)=h*i;
-    *(b_vector+i) = double(i+1)/double(i);
-    *(tilde_vector +i)=f_analytic(x_vector[i])*power;
+    *(b_vector+i) = double(i+2)/double(i+1);
+    *(tilde_vector +i)=f_analytic(x_vector[i])*power+(*(tilde_vector+i-1)/(*(b_vector+i-1)));
     *(u_vector+i)=u(x_vector[i]);
 }
 
 // Forward substitution
 
-for (int i = 1; i < n; ++i)
-{
-   *(tilde_vector +i)=*(tilde_vector+i)+*(tilde_vector+i-1)/(*(b_vector+i));
-}
 
 //Finner verdien til v_n
 *(v_vector +n-1)=*(tilde_vector +n-1)/(*(b_vector +n-1));
@@ -169,7 +165,7 @@ for (int i = 1; i < n; ++i)
 //backward substetution
 for(int k=n-2;k>=0;k-=1){
 
-    *(v_vector +k)=(*(tilde_vector +k)+(*(v_vector +k+1)))/(*(b_vector +k));
+    *(v_vector +k)=(*(tilde_vector +k)+(*(v_vector +k+1)))/(*(b_vector +k-1));
 
 
 }
@@ -213,7 +209,7 @@ return 0;
 
 int main(){
 
-	cout << "test" << endl;
+cout << "test" << endl;
 
  int n = pow(10,3);
  special(n);
