@@ -149,11 +149,11 @@ for(int i=1; i<=n; i++){
 }
 
 //Finner verdien til v_n
-*(v_vector +n-1)=*(tilde_vector +n-1)*power/(*(b_vector +n-1));
+*(v_vector +n-1)=*(tilde_vector +n-1)/(*(b_vector +n-1));
 
 //backward substetution
 for(int k=n-2;k>=0;k-=1){
-    *(v_vector +k)=(*(tilde_vector +k)*power+(*(v_vector +k+1)))/(*(b_vector +k));
+    *(v_vector +k)=(*(tilde_vector +k)+(*(v_vector +k+1)))/(*(b_vector +k));
 
 }
 
